@@ -59,25 +59,25 @@ class State:
         This simulation is essential for understanding how the vehicle behaves as it follows the desired trajectory and adjusts its speed and steering to stay on track.
 
         """
-       # v CAN, yaw CAN--> x hesapla
+      
         self.x += self.v * math.cos(self.yaw) * dt                  # x (float): The x position of the vehicle. Updates the vehicle's x position by integrating its velocity (self.v) along the x-axis,
                                                                     # taking into account its orientation (self.yaw) to calculate the change in x position over the time interval dt.
                                                                     # X = V * cos(ϴ+β) (ref:3 pp:3 eq:13)
                                                                     # vehicle slip angle β = arctan ((lr*tan(δ))/(lf+lr)) (ref:3 pp:3 eq:16)
                                                                     
                                                                     
-       # v CAN, yaw CAN--> y hesapla    
+         
         self.y += self.v * math.sin(self.yaw) * dt                  # y (float): The y position of the vehicle. Similar to the previous line, 
                                                                     # this updates the vehicle's y position based on its velocity and orientation.
                                                                     # Y = V * sin(ϴ+β) [Lateral Vehicle Dynamics (ref:3 pp:3 eq:9)]
                                                                     # vehicle slip angle β = arctan ((lr*tan(δ))/(lf+lr)) (ref:3 pp:3 eq:16)
                                                                    
-        #  self.yaw= CAN den gelen
+       
         self.yaw += self.v / WB * math.tan(delta) * dt              # yaw (float): The orientation of the vehicle. Updates the vehicle's orientation (yaw) by integrating the change in yaw angle over time. 
                                                                     # The change in yaw angle is calculated based on the vehicle's velocity, the wheelbase (WB), and the calculated steering angle (delta).
                                                                     # ϴ = V * tan(δ) / L [ref:1 pp:3 eq:2c]
                                                                      
-        #  self.v= CAN den gelen
+       
         self.v += a * dt                                            # v (float): The velocity of the vehicle. Updates the vehicle's velocity by integrating the acceleration (a) over time.
                                                                     # This accounts for changes in the vehicle's speed due to the applied acceleration.
                                                                     
@@ -116,7 +116,7 @@ class States:
 
 def proportional_control(target, current):                          # This function calculates the acceleration required to adjust the vehicle's velocity to the target velocity.
     a = Kp * (target - current)                                     # target (float): The target velocity.
-# Target CAN den gelecek    
+  
     return a                                                        # current (float): The current velocity.
 
 
@@ -299,7 +299,7 @@ def plot_arrow(x, y, yaw, length=1.0, width=0.5, fc="r", ec="k"):
 
     """
 def main():
-#2)  Bicyle modele gore cx,xy hesapla
+
 
     cx = np.arange(0, 50, 0.5)                                  # cx (list): A list of the x coordinates of the target course.
     cy = [math.sin(ix / 5.0) * ix / 2.0 for ix in cx]           # cy (list): A list of the y coordinates of the target course.
